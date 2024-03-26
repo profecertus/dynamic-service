@@ -8,6 +8,6 @@ RUN mvn clean package
 FROM openjdk:17-ea-oraclelinux8
 WORKDIR /app
 COPY --from=build /app/target/dynamic-service-0.0.1-SNAPSHOT.jar /app
-EXPOSE 8082
+EXPOSE 8182
 #CMD ["java", "-cp", "ojdbc8.jar:GPService-0.0.1-SNAPSHOT.jar", "pe.com.isesystem.gpservice.GpServiceApplication"]
 CMD ["java", "-jar", "dynamic-service-0.0.1-SNAPSHOT.jar"]
