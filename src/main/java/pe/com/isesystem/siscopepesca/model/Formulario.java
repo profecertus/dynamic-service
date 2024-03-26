@@ -13,6 +13,7 @@ public class Formulario {
     public String nombreFormulario;
     public String icono;
     public String mensaje;
+    public boolean estado;
     public String title;
     public List<Forms> formulario;
 }
