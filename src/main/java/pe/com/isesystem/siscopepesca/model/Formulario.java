@@ -8,7 +8,7 @@ import java.util.List;
 @Setter
 @Getter
 public class Formulario {
-    public Object _id;
+    public Object id;
     public int  idFormulario;
     public String nombreFormulario;
     public String icono;
