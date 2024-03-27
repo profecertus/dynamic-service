@@ -1,4 +1,7 @@
 package pe.com.isesystem.siscopepesca.controller;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
@@ -32,5 +35,16 @@ public class FormularioController {
                 "forms"
         );
         return new ResponseEntity<>(documentos, HttpStatus.OK);
+    }
+
+    @PostMapping("/saveFormulario")
+    public ResponseEntity<String> saveFormulario( @RequestBody Object formulario) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String descargaJson = objectMapper.writeValueAsString(formulario);
+        JsonNode jsonNode = objectMapper.readTree(descargaJson);
+        //String numTicket = jsonNode.get("numTicket").toString();
+        mongoTemplate.save(formulario, "forms");
+        return new ResponseEntity<String>("OK", HttpStatus.OK);
     }
 }
