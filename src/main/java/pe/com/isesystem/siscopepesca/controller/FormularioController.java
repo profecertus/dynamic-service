@@ -3,14 +3,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.model.Sorts;
+import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.apache.logging.log4j.*;
 import pe.com.isesystem.siscopepesca.model.Formulario;
+import pe.com.isesystem.siscopepesca.model.FormularioNew;
 import pe.com.isesystem.siscopepesca.model.HttpRespuesta;
 
 import java.util.Comparator;
@@ -46,11 +47,20 @@ public class FormularioController {
         ObjectMapper objectMapper = new ObjectMapper();
         Query miQuery = new Query(where("idFormulario").gt(0));
 
-        System.out.println(formulario);
-        if(formulario.id == null){
-            
+        if(formulario._id == null){
+            //En este caso debo de buscar el nuevo IdFormulario
+            FormularioNew fn = new FormularioNew();
+            fn.setFormulario(formulario.getFormulario());
+            fn.setIdFormulario(formulario.getIdFormulario());
+            fn.setNombreFormulario(formulario.nombreFormulario);
+            fn.setMensaje(formulario.getMensaje());
+            fn.setIcono(formulario.getIcono());
+            fn.setEstado(formulario.isEstado());
+            fn.setTitle(formulario.getTitle());
+            mongoTemplate.save(fn, "forms");
+        }else{
+            mongoTemplate.save(formulario, "forms");
         }
-        mongoTemplate.save(formulario, "forms");
         return new ResponseEntity<HttpRespuesta>(new HttpRespuesta("OK", 1), HttpStatus.OK);
     }
 }

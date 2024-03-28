@@ -3,14 +3,12 @@ package pe.com.isesystem.siscopepesca.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 
 @Setter
 @Getter
-public class Formulario {
-    public String _id;
+public class FormularioNew {
     public int  idFormulario;
     public String nombreFormulario;
     public String icono;
