@@ -1,10 +1,9 @@
 package pe.com.isesystem.siscopepesca.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongodb.client.model.Sorts;
-import org.bson.Document;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,14 +43,14 @@ public class FormularioController {
 
     @PostMapping("/saveFormulario")
     public ResponseEntity<HttpRespuesta> saveFormulario( @RequestBody Formulario formulario) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Query miQuery = new Query(where("idFormulario").gt(0));
+        int valorRetorno = 0;
 
         if(formulario._id == null){
             //En este caso debo de buscar el nuevo IdFormulario
+            valorRetorno = this.getMaxIdFormulario() + 1;
             FormularioNew fn = new FormularioNew();
             fn.setFormulario(formulario.getFormulario());
-            fn.setIdFormulario(formulario.getIdFormulario());
+            fn.setIdFormulario(valorRetorno);
             fn.setNombreFormulario(formulario.nombreFormulario);
             fn.setMensaje(formulario.getMensaje());
             fn.setIcono(formulario.getIcono());
@@ -61,6 +60,28 @@ public class FormularioController {
         }else{
             mongoTemplate.save(formulario, "forms");
         }
-        return new ResponseEntity<HttpRespuesta>(new HttpRespuesta("OK", 1), HttpStatus.OK);
+        return new ResponseEntity<HttpRespuesta>(new HttpRespuesta("OK", 1, valorRetorno), HttpStatus.OK);
+    }
+
+    public int getMaxIdFormulario() {
+        Aggregation aggregation = Aggregation.newAggregation(
+                Aggregation.group().max("idFormulario").as("maxId")
+        );
+
+        AggregationResults<ResultMaxId> results = mongoTemplate.aggregate(aggregation, "forms", ResultMaxId.class);
+        ResultMaxId resultMaxId = results.getUniqueMappedResult();
+        return resultMaxId != null ? resultMaxId.getMaxId() : 0;
+    }
+
+    private static class ResultMaxId {
+        private int maxId;
+
+        public int getMaxId() {
+            return maxId;
+        }
+
+        public void setMaxId(int maxId) {
+            this.maxId = maxId;
+        }
     }
 }
