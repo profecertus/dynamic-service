@@ -52,6 +52,23 @@ public class FormularioController {
         );
         return new ResponseEntity<>(documentos, HttpStatus.OK);
     }
+    @GetMapping("/getRespuestas")
+    public ResponseEntity<List<Formulario>> getRespuestas(@RequestParam(value = "estado", required = false) Boolean estado) {
+        Query miQuery;
+        if (estado != null) {
+            miQuery = new Query(where("estado").is(estado));
+        } else {
+            miQuery = new Query();
+        }
+
+        List<Formulario> documentos = mongoTemplate.find(
+                miQuery,
+                Formulario.class,
+                "forms"
+        );
+        return new ResponseEntity<>(documentos, HttpStatus.OK);
+    }
+
 
     @PostMapping("/saveDatosForm")
     public ResponseEntity<HttpRespuesta> saveDatosForm( @RequestBody Object formulario) throws JsonProcessingException {
