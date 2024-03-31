@@ -54,7 +54,7 @@ public class FormularioController {
     }
 
     @PostMapping("/saveDatosForm")
-    public ResponseEntity<HttpRespuesta> saveDatosForm( @RequestBody Formulario formulario) throws JsonProcessingException {
+    public ResponseEntity<HttpRespuesta> saveDatosForm( @RequestBody Object formulario) throws JsonProcessingException {
         int valorRetorno = 0;
 
         mongoTemplate.save(formulario, "respuestas");
