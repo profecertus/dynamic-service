@@ -14,7 +14,9 @@ import pe.com.isesystem.siscopepesca.model.FormularioNew;
 import pe.com.isesystem.siscopepesca.model.HttpRespuesta;
 
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
@@ -71,9 +73,11 @@ public class FormularioController {
 
 
     @PostMapping("/saveDatosForm")
-    public ResponseEntity<HttpRespuesta> saveDatosForm( @RequestBody Object formulario) throws JsonProcessingException {
+    public ResponseEntity<HttpRespuesta> saveDatosForm( @RequestBody Map<String, Object> formulario) throws JsonProcessingException {
         int valorRetorno = 0;
 
+        formulario.put("fecha", new Date());
+        formulario.put("estado", false);
         mongoTemplate.save(formulario, "respuestas");
 
         return new ResponseEntity<HttpRespuesta>(new HttpRespuesta("OK", 1, valorRetorno), HttpStatus.OK);
