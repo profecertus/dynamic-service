@@ -53,7 +53,7 @@ public class FormularioController {
         return new ResponseEntity<>(documentos, HttpStatus.OK);
     }
     @GetMapping("/getRespuestas")
-    public ResponseEntity<List<Formulario>> getRespuestas(@RequestParam(value = "estado", required = false) Boolean estado) {
+    public ResponseEntity<List<Object>> getRespuestas(@RequestParam(value = "estado", required = false) Boolean estado) {
         Query miQuery;
         if (estado != null) {
             miQuery = new Query(where("estado").is(estado));
@@ -61,10 +61,10 @@ public class FormularioController {
             miQuery = new Query();
         }
 
-        List<Formulario> documentos = mongoTemplate.find(
+        List<Object> documentos = mongoTemplate.find(
                 miQuery,
-                Formulario.class,
-                "forms"
+                Object.class,
+                "respuestas"
         );
         return new ResponseEntity<>(documentos, HttpStatus.OK);
     }
