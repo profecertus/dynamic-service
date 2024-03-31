@@ -30,8 +30,20 @@ public class FormularioController {
     }
 
     @GetMapping("/getFormularios")
-    public ResponseEntity<List<Formulario>> getGastos() {
+    public ResponseEntity<List<Formulario>> getFormulario() {
         Query miQuery = new Query(where("idFormulario").gt(0));
+
+        List<Formulario> documentos = mongoTemplate.find(
+                miQuery,
+                Formulario.class,
+                "forms"
+        );
+        return new ResponseEntity<>(documentos, HttpStatus.OK);
+    }
+
+    @GetMapping("/getFormulariosMobile")
+    public ResponseEntity<List<Formulario>> getFormularioMobile() {
+        Query miQuery = new Query(where("estado").is(true));
 
         List<Formulario> documentos = mongoTemplate.find(
                 miQuery,
