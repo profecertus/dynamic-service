@@ -168,7 +168,7 @@ public class FormularioController {
         }
 
         //Exclude some fields
-        miQuery.fields().exclude( "_id").exclude("usuario").
+        miQuery.fields().exclude( "_id").exclude("usuario").exclude("idFormulario").
                 exclude("nombreFormulario").exclude("latitud").
                 exclude("longitud").exclude("altitud").exclude("fecha").exclude("estado");
 
