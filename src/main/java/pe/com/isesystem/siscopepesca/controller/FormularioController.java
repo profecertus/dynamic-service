@@ -13,6 +13,8 @@ import pe.com.isesystem.siscopepesca.model.Formulario;
 import pe.com.isesystem.siscopepesca.model.FormularioNew;
 import pe.com.isesystem.siscopepesca.model.HttpRespuesta;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -178,8 +180,19 @@ public class FormularioController {
                 "respuestas"
         );
 
+        List<Object> respuesta = new ArrayList<>();
 
-        return new ResponseEntity<>(documentos, HttpStatus.OK);
+        for (Object object : documentos) {
+            if (object instanceof Map) {
+                Map<String, Object> map = (Map<String, Object>) object;
+                for (Map.Entry<String, Object> entry : map.entrySet()) {
+                    respuesta.add(entry);
+                }
+            } else {
+                System.out.println("El objeto no es un mapa, no se pueden obtener los atributos.");
+            }
+        }
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
 
     public int getMaxIdFormulario() {
