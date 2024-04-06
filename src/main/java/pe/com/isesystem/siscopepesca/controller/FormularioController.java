@@ -158,7 +158,7 @@ public class FormularioController {
     }
 
     @GetMapping("/formularioEnviado")
-    public ResponseEntity<List<Response>>  formularioEnviado(@RequestParam(value = "id", required = true) String id) {
+    public ResponseEntity<List<Object>>  formularioEnviado(@RequestParam(value = "id", required = true) String id) {
         Query miQuery;
 
         if (id != null) {
@@ -167,36 +167,12 @@ public class FormularioController {
             miQuery = new Query();
         }
 
-        List<Response> documentos = mongoTemplate.find(
+        List<Object> documentos = mongoTemplate.find(
                 miQuery,
-                Response.class,
+                Object.class,
                 "respuestas"
         );
 
-        //if some field is null then set string empty
-        for (Response response : documentos) {
-            if (response.usuario == null) {
-                response.usuario = "ND";
-            }
-            if (response.nombreFormulario == null) {
-                response.nombreFormulario = "ND";
-            }
-            if (response.latitud == null) {
-                response.latitud = "ND";
-            }
-            if (response.longitud == null) {
-                response.longitud = "ND";
-            }
-            if (response.altitud == null) {
-                response.altitud = "ND";
-            }
-            if (response.fecha == null) {
-                response.fecha = "ND";
-            }
-            if (response.estado == null) {
-                response.estado = false;
-            }
-        }
         return new ResponseEntity<>(documentos, HttpStatus.OK);
     }
 
