@@ -1,6 +1,7 @@
 package pe.com.isesystem.siscopepesca.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -8,12 +9,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.apache.logging.log4j.*;
 import pe.com.isesystem.siscopepesca.model.Formulario;
 import pe.com.isesystem.siscopepesca.model.FormularioNew;
 import pe.com.isesystem.siscopepesca.model.HttpRespuesta;
 
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +61,11 @@ public class FormularioController {
         } else {
             miQuery = new Query();
         }
+
+        //Show some fields
+        miQuery.fields().include( "_id").include("usuario").
+                include("nombreFormulario").include("latitud").
+                include("longitud").include("altitud").include("fecha").include("estado");
 
         List<Object> documentos = mongoTemplate.find(
                 miQuery,
