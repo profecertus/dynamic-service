@@ -1,7 +1,9 @@
-/media/edwin/Windows-SSD/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/SiscopePescaApplication.java
-/media/edwin/Windows-SSD/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/model/Campo.java
-/media/edwin/Windows-SSD/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/configuration/CorsConfig.java
-/media/edwin/Windows-SSD/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/controller/FormularioController.java
-/media/edwin/Windows-SSD/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/model/Opcion.java
-/media/edwin/Windows-SSD/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/model/Forms.java
-/media/edwin/Windows-SSD/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/model/Formulario.java
+/home/edwin/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/model/HttpRespuesta.java
+/home/edwin/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/controller/FormularioController.java
+/home/edwin/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/SiscopePescaApplication.java
+/home/edwin/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/model/Opcion.java
+/home/edwin/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/model/Formulario.java
+/home/edwin/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/model/Campo.java
+/home/edwin/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/configuration/CorsConfig.java
+/home/edwin/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/model/Forms.java
+/home/edwin/repositorio/dynamic-service/src/main/java/pe/com/isesystem/siscopepesca/model/FormularioNew.java

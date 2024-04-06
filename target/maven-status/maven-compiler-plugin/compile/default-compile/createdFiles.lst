@@ -1,7 +1,10 @@
+pe/com/isesystem/siscopepesca/model/FormularioNew.class
 pe/com/isesystem/siscopepesca/controller/FormularioController.class
-pe/com/isesystem/siscopepesca/model/Campo.class
+pe/com/isesystem/siscopepesca/controller/FormularioController$ResultMaxId.class
 pe/com/isesystem/siscopepesca/model/Formulario.class
+pe/com/isesystem/siscopepesca/model/Campo.class
 pe/com/isesystem/siscopepesca/model/Forms.class
+pe/com/isesystem/siscopepesca/model/HttpRespuesta.class
 pe/com/isesystem/siscopepesca/SiscopePescaApplication.class
 pe/com/isesystem/siscopepesca/model/Opcion.class
 pe/com/isesystem/siscopepesca/configuration/CorsConfig.class
