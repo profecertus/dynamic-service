@@ -157,7 +157,7 @@ public class FormularioController {
         return new ResponseEntity<HttpRespuesta>(new HttpRespuesta("OK", 1, valorRetorno), HttpStatus.OK);
     }
 
-    @PostMapping("/formularioEnviado")
+    @GetMapping("/formularioEnviado")
     public ResponseEntity<List<Response>>  formularioEnviado(@RequestParam(value = "id", required = true) String id) {
         Query miQuery;
 
