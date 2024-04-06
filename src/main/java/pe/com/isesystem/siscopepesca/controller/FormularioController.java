@@ -54,7 +54,7 @@ public class FormularioController {
         return new ResponseEntity<>(documentos, HttpStatus.OK);
     }
     @GetMapping("/getRespuestas")
-    public ResponseEntity<List<Object>> getRespuestas(@RequestParam(value = "estado", required = false) Boolean estado) {
+    public ResponseEntity<List<Response>> getRespuestas(@RequestParam(value = "estado", required = false) Boolean estado) {
         Query miQuery;
         if (estado != null) {
             miQuery = new Query(where("estado").is(estado));
@@ -62,17 +62,27 @@ public class FormularioController {
             miQuery = new Query();
         }
 
-        //Show some fields
         miQuery.fields().include( "_id").include("usuario").
                 include("nombreFormulario").include("latitud").
                 include("longitud").include("altitud").include("fecha").include("estado");
 
-        List<Object> documentos = mongoTemplate.find(
+        List<Response> documentos = mongoTemplate.find(
                 miQuery,
-                Object.class,
+                Response.class,
                 "respuestas"
         );
         return new ResponseEntity<>(documentos, HttpStatus.OK);
+    }
+
+    class Response{
+        public String _id;
+        public String usuario;
+        public String nombreFormulario;
+        public String latitud;
+        public String longitud;
+        public String altitud;
+        public String fecha;
+        public Boolean estado;
     }
 
 
@@ -144,3 +154,4 @@ public class FormularioController {
         }
     }
 }
+
