@@ -75,22 +75,22 @@ public class FormularioController {
         //if some field is null then set string empty
         for (Response response : documentos) {
             if (response.usuario == null) {
-                response.usuario = "";
+                response.usuario = "ND";
             }
             if (response.nombreFormulario == null) {
-                response.nombreFormulario = "";
+                response.nombreFormulario = "ND";
             }
             if (response.latitud == null) {
-                response.latitud = "";
+                response.latitud = "ND";
             }
             if (response.longitud == null) {
-                response.longitud = "";
+                response.longitud = "ND";
             }
             if (response.altitud == null) {
-                response.altitud = "";
+                response.altitud = "ND";
             }
             if (response.fecha == null) {
-                response.fecha = "";
+                response.fecha = "ND";
             }
             if (response.estado == null) {
                 response.estado = false;
