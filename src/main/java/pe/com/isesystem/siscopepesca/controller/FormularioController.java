@@ -167,11 +167,17 @@ public class FormularioController {
             miQuery = new Query();
         }
 
+        //Exclude some fields
+        miQuery.fields().exclude( "_id").exclude("usuario").
+                exclude("nombreFormulario").exclude("latitud").
+                exclude("longitud").exclude("altitud").exclude("fecha").exclude("estado");
+
         List<Object> documentos = mongoTemplate.find(
                 miQuery,
                 Object.class,
                 "respuestas"
         );
+
 
         return new ResponseEntity<>(documentos, HttpStatus.OK);
     }
