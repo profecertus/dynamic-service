@@ -87,6 +87,19 @@ public class FormularioController {
         return new ResponseEntity<HttpRespuesta>(new HttpRespuesta("OK", 1, valorRetorno), HttpStatus.OK);
     }
 
+    @PostMapping("/validaUsuario")
+    public ResponseEntity<HttpRespuesta> validaUsuario( @RequestBody Map<String, Object> formulario) throws JsonProcessingException {
+        /*
+        int valorRetorno = 0;
+
+        formulario.put("fecha", new Date());
+        formulario.put("estado", false);
+        mongoTemplate.save(formulario, "respuestas");
+        */
+        return new ResponseEntity<HttpRespuesta>(new HttpRespuesta("OK", 1, 1), HttpStatus.OK);
+    }
+
+
     @PostMapping("/saveFormulario")
     public ResponseEntity<HttpRespuesta> saveFormulario( @RequestBody Formulario formulario) throws JsonProcessingException {
         int valorRetorno = 0;
