@@ -71,6 +71,31 @@ public class FormularioController {
                 Response.class,
                 "respuestas"
         );
+
+        //if some field is null then set string empty
+        for (Response response : documentos) {
+            if (response.usuario == null) {
+                response.usuario = "";
+            }
+            if (response.nombreFormulario == null) {
+                response.nombreFormulario = "";
+            }
+            if (response.latitud == null) {
+                response.latitud = "";
+            }
+            if (response.longitud == null) {
+                response.longitud = "";
+            }
+            if (response.altitud == null) {
+                response.altitud = "";
+            }
+            if (response.fecha == null) {
+                response.fecha = "";
+            }
+            if (response.estado == null) {
+                response.estado = false;
+            }
+        }
         return new ResponseEntity<>(documentos, HttpStatus.OK);
     }
 
